@@ -1,0 +1,22 @@
+version: "3"
+services:
+  db:
+    image: neo4j
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - dbdata:/data
+  service:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      RC_TWITTER_CONSUMER_KEY: ${RC_TWITTER_CONSUMER_KEY}
+      RC_TWITTER_CONSUMER_SECRET: ${RC_TWITTER_CONSUMER_SECRET}
+      RC_TWITTER_ACCESS_TOKEN_KEY: ${RC_TWITTER_ACCESS_TOKEN_KEY}
+      RC_TWITTER_ACCESS_TOKEN_SECRET: ${RC_TWITTER_ACCESS_TOKEN_SECRET}
+
+
+volumes:
+  dbdata:
