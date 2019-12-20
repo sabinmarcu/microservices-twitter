@@ -1,17 +1,35 @@
 version: "3"
 services:
-  db:
-    image: neo4j
+
+  # neo4j:
+  #   image: neo4j
+  #   ports:
+  #     - 7474:7474
+  #     - 7687:7687
+  #   volumes:
+  #     - neo4jdata:/data
+
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - 6379:6379
+
+  mongo:
+    image: mongo
     ports:
-      - 7474:7474
-      - 7687:7687
-    volumes:
-      - dbdata:/data
+      - 27017:27017
+
   service:
     build: .
     volumes:
       - .:/app
+    command: node src/index
+    depends_on:
+      - redis
     environment:
+      QUERY: ${QUERY}
+      RC_REDIS_HOST: redis
+      RC_REDIS_PORT: 6379
       RC_TWITTER_CONSUMER_KEY: ${RC_TWITTER_CONSUMER_KEY}
       RC_TWITTER_CONSUMER_SECRET: ${RC_TWITTER_CONSUMER_SECRET}
       RC_TWITTER_ACCESS_TOKEN_KEY: ${RC_TWITTER_ACCESS_TOKEN_KEY}
@@ -19,4 +37,4 @@ services:
 
 
 volumes:
-  dbdata:
+  neo4jdata:
