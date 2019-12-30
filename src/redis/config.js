@@ -1,7 +1,7 @@
 import { combineWithEnv } from '../utils';
 
 export const baseConfig = {
-  host: 'localhost',
+  host: '0.0.0.0',
   port: '6379',
 };
 
