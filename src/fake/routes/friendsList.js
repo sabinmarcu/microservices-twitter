@@ -2,17 +2,19 @@
 import { internet } from 'faker';
 import debug from '../../log';
 import makeRoute from '../shared';
-import makeLimiter from '../rate';
+import { makeLimiter } from '../rate';
+
+export const endpoint = '/friends/list';
 
 const accounts = [];
 const accountsMap = {};
 const relationships = {};
 const bindAccounts = (a, b) => {
-  if (!relationships[a.user_id]) {
-    relationships[a.user_id] = [];
+  if (!relationships[a.screen_name]) {
+    relationships[a.screen_name] = [];
   }
-  relationships[a.user_id].push(b.user_id);
-  relationships[a.user_id] = relationships[a.user_id]
+  relationships[a.screen_name].push(b.screen_name);
+  relationships[a.screen_name] = relationships[a.screen_name]
     .sort()
     .filter((it, index, arr) => arr.indexOf(it) === index);
 };
@@ -22,16 +24,16 @@ const [rstart, rend] = (process.env.RC_TWITTER_FRIENDS_RANGE || '3:5')
   .map((it) => parseInt(it, 10));
 
 const makeAccount = (username, log) => {
-  const user_id = username || internet.userName();
-  if (!accountsMap[user_id]) {
+  const screen_name = username || internet.userName();
+  if (!accountsMap[screen_name]) {
     const account = ({
-      user_id,
+      screen_name,
     });
     accounts.push(account);
-    accountsMap[user_id] = account;
-    log('Created account %s', user_id);
+    accountsMap[screen_name] = account;
+    log('Created account %s', screen_name);
   }
-  return accountsMap[user_id];
+  return accountsMap[screen_name];
 };
 
 export default (server, logger) => {
@@ -42,7 +44,7 @@ export default (server, logger) => {
   const limiter = makeLimiter(limit, timeout, log);
   makeRoute(
     server,
-    'friends/list',
+    endpoint,
     log,
     (req, res) => {
       const canServe = limiter.consume();
@@ -52,29 +54,29 @@ export default (server, logger) => {
         return;
       }
 
-      const { user_id } = req.query;
-      if (!user_id) {
-        log.error('Requested without user_id');
-        res.json({ success: false, message: 'No user_id supplied' });
+      const { screen_name } = req.query;
+      if (!screen_name) {
+        log.error('Requested without screen_name');
+        res.json({ success: false, message: 'No screen_name supplied' });
         return;
       }
 
-      log('Finding', user_id);
-      let account = accountsMap[user_id];
+      log('Finding', screen_name);
+      let account = accountsMap[screen_name];
       if (account) {
         log('Found', account);
       } else {
         log('Creating new account');
-        account = makeAccount(user_id, log);
+        account = makeAccount(screen_name, log);
       }
-      if (!relationships[user_id]) {
+      if (!relationships[screen_name]) {
         log('Will generate between %d and %d friends', rstart, rend);
 
         const total = parseInt(Math.random() * (rend - rstart), 10) + rstart;
         const take = Math.min(
           Math.floor(total / 2),
           accounts
-            .filter(({ user_id: it }) => it !== user_id)
+            .filter(({ screen_name: it }) => it !== screen_name)
             .length,
         );
         const create = total - take;
@@ -91,7 +93,10 @@ export default (server, logger) => {
             let acc;
             do {
               acc = accounts[parseInt(Math.random() * accounts.length, 10)];
-            } while (acc.user_id === user_id || list.find(({ user_id: it }) => it === user_id));
+            } while (
+              acc.screen_name === screen_name
+              || list.find(({ screen_name: it }) => it === screen_name)
+            );
             list.push(acc);
           }
           return list;
@@ -102,7 +107,7 @@ export default (server, logger) => {
           .forEach((acc) => bindAccounts(account, acc));
       }
 
-      res.json(relationships[user_id].map((it) => accountsMap[it]));
+      res.json(relationships[screen_name].map((it) => accountsMap[it]));
     },
   );
 };

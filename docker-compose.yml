@@ -9,31 +9,42 @@ services:
   #   volumes:
   #     - neo4jdata:/data
 
-  redis:
-    image: redis
-    ports:
-      - 6379:6379
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - 6379:6379
 
   mongo:
     image: mongo
     ports:
       - 27017:27017
 
+  fake:
+    build: .
+    volumes:
+      - .:/app
+    command: node src/index
+    environment:
+      NODE_ENV: $NODE_ENV
+      NODE_SCRIPT: fake
+      DEBUG_APP: server
+      DEBUG: "server:*"
+    ports:
+      - 5000:5000
+
   service:
     build: .
     volumes:
       - .:/app
     command: node src/index
-    depends_on:
-      - redis
     environment:
       QUERY: ${QUERY}
       RC_REDIS_HOST: redis
       RC_REDIS_PORT: 6379
-      RC_TWITTER_CONSUMER_KEY: ${RC_TWITTER_CONSUMER_KEY}
-      RC_TWITTER_CONSUMER_SECRET: ${RC_TWITTER_CONSUMER_SECRET}
-      RC_TWITTER_ACCESS_TOKEN_KEY: ${RC_TWITTER_ACCESS_TOKEN_KEY}
-      RC_TWITTER_ACCESS_TOKEN_SECRET: ${RC_TWITTER_ACCESS_TOKEN_SECRET}
+      NODE_ENV: $NODE_ENV
+      NODE_SCRIPT: app
+      DEBUG_APP: importer
+      DEBUG: "importer:*"
 
 
 volumes:

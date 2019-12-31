@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const debug = require('debug');
 
-const appPrefix = 'app';
+const appPrefix = process.env.DEBUG_APP || 'app';
 
 const mergeDebug = (it) => it
   .concat(process.env.DEBUG
@@ -34,7 +34,7 @@ const makeLogger = (name, parent) => {
 };
 
 
-let debugs = [];
+let debugs = process.env.DEBUG ? process.env.DEBUG.split(',') : [];
 
 const refreshDebug = () => {
   debugs = debugs
@@ -44,7 +44,7 @@ const refreshDebug = () => {
 };
 
 const enableBootstrap = () => {
-  debugs.push([appPrefix, 'bootstrap'].join(','));
+  debugs.push([appPrefix, 'bootstrap'].join(':'));
   refreshDebug();
 };
 
@@ -58,7 +58,10 @@ const loadFromEnv = () => {
   refreshDebug();
 };
 
+const enabled = () => debugs;
+
 module.exports = makeLogger;
 module.exports.loadDesignation = loadDesignation;
 module.exports.loadFromEnv = loadFromEnv;
 module.exports.enableBootstrap = enableBootstrap;
+module.exports.enabled = enabled;

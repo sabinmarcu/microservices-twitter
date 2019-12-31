@@ -5,6 +5,7 @@ export const baseConfig = {
   consumer_secret: '',
   access_token_key: '',
   access_token_secret: '',
+  endpoint: '',
 };
 
 export const envConfig = combineWithEnv(baseConfig, { prefix: 'twitter_' });

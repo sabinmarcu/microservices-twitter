@@ -1,9 +1,4 @@
-import { promisify } from 'util';
-import Twitter from 'twitter';
-import twitterConfig from './config';
-
-export const client = new Twitter(twitterConfig);
-export const promisifiedClient = {
-  get: promisify(client.get).bind(client),
-};
-export default promisifiedClient;
+// eslint-disable-next-line import/no-dynamic-require,global-require
+export default ((which) => require(`./${which}`).default)(
+  process.env.NODE_ENV === 'production' ? 'legit' : 'fake',
+);

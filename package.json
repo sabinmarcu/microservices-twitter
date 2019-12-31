@@ -23,10 +23,12 @@
     "faker": "^4.1.0",
     "mongodb": "^3.4.1",
     "neo4j-driver": "^4.0.1",
+    "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
     "redis": "^2.8.0",
     "supports-color": "^7.1.0",
     "twit": "^2.2.11",
-    "twitter": "^1.7.1"
+    "twitter": "^1.7.1",
+    "urijs": "^1.19.2"
   }
 }
