@@ -54,7 +54,13 @@ export default (server, logger) => {
         return;
       }
 
-      const { screen_name } = req.query;
+      const {
+        screen_name,
+        cursor: cursorStr,
+        count: countStr = '2',
+      } = req.query;
+      const cursor = parseInt(cursorStr, 10);
+      const count = parseInt(countStr, 10);
       if (!screen_name) {
         log.error('Requested without screen_name');
         res.json({ success: false, message: 'No screen_name supplied' });
@@ -107,7 +113,24 @@ export default (server, logger) => {
           .forEach((acc) => bindAccounts(account, acc));
       }
 
-      res.json(relationships[screen_name].map((it) => accountsMap[it]));
+      let users = relationships[screen_name].map((it) => accountsMap[it]);
+      let next_cursor = 0;
+      if (typeof cursorStr !== 'undefined' && count) {
+        log('Filtering through cursor %d (count %d)', cursor, count);
+        log('Selecting indices [%d, %d]', cursor, cursor + count - 1);
+        users = users.filter(
+          (it, index) => (index >= cursor) && (index < cursor + count),
+        );
+        next_cursor = cursor + count;
+        if (next_cursor > users.length) {
+          next_cursor = -1;
+        }
+      }
+
+      res.json({
+        users,
+        next_cursor,
+      });
     },
   );
 };
