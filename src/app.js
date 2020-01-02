@@ -14,7 +14,7 @@ const cursorEncoder = {
   const handle = process.env.QUERY || process.argv[2];
   log.info(`Importing tree for ${chalk.yellow(handle)}`);
 
-  log(twitter);
+  log(await twitter.get('friends/list', query));
 
   // const queueKey = `${handle}:queue`;
   // const cursorKey = `${handle}:cursor`;
