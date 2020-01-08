@@ -9,11 +9,13 @@ const endpoint = `http://${twitterConfig.endpoint}`;
 log('Api Consuming %s', endpoint);
 
 export const client = {
-  get: (url, screenName) => {
-    log('Requested %s with query %s', url, screenName);
+  get: (url, query) => {
+    log('Requested %s with query', url, query);
     const uri = new URI(endpoint);
-    uri.addFragment(url);
-    uri.addQuery('screen_name', screenName);
+    uri.segment(url);
+    Object.entries(query)
+      .forEach(([key, value]) => uri.addQuery(key, value));
+    log('Requesting', uri.toString());
     return fetch(uri.toString()).then((data) => data.json());
   },
 };

@@ -1,47 +1,30 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-await-in-loop */
 import chalk from 'chalk';
-import twitter from './twitter';
 import debug from './log';
+import Twitter from './appTwitter';
 
 const log = debug('importer');
 
-const cursorEncoder = {
-  encode: (handle, cursor) => `${handle}:${cursor}`,
-  decode: (str) => (([handle, cursor]) => ({ handle, cursor }))(str.split(':')),
-};
-
+const count = 1;
 (async () => {
   const handle = process.env.QUERY || process.argv[2];
-  log.info(`Importing tree for ${chalk.yellow(handle)}`);
 
-  log(await twitter.get('friends/list', query));
+  if (!handle) {
+    log.error('No handle supplied!');
+    process.exit(1);
+  }
 
-  // const queueKey = `${handle}:queue`;
-  // const cursorKey = `${handle}:cursor`;
+  const twitter = new Twitter({ handle, logger: log, count });
+  await twitter.ready();
+  await twitter.start();
 
-  // let queue = JSON.parse(await redis.get(queueKey));
-  // if (queue && queue.length > 0) {
-  //   log(`Continuing queue at ${chalk.green(queue[0])}`);
-  // } else {
-  //   log(`Starting queue at ${chalk.green(handle)}`);
-  //   queue = [handle];
-  // }
+  // const user = await db.getUser(handle);
+  // const data = await twitter.get('friends/list', { screen_name: user.screen_name });
+  // await Promise.all(data.users.map(({ screen_name }) => db.getUser(screen_name)));
 
-  // let cursor = JSON.parse(await redis.get(cursorKey));
-  // if (cursor) {
-  //   cursor = cursorEncoder.decode(cursor).cursor;
-  //   log(`Continuing with cursor ${chalk.magenta(cursor)}`);
-  // } else {
-  //   cursor = -1;
-  //   log(`Starting cursor at ${chalk.magenta(cursor)}`);
-  // }
-
-  // const debugRedis = async () => {
-  //   log('Redis Queue', await redis.get(queueKey));
-  //   log('Redis Cursor', await redis.get(cursorKey));
-  // };
-
-  // debugRedis();
+  // const cursor = await db.getCursor();
+  // const queue = await db.getQueue();
 
   // do {
   //   const item = queue[0];

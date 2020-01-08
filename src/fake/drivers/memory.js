@@ -45,7 +45,7 @@ export class InMemoryDriver extends Interface {
       .filter((it, index, arr) => arr.indexOf(it) === index);
   }
 
-  getFriendsOf = async (id) => this.relationships[id].map((it) => this.accountsMap[it])
+  getFriendsOf = async (id) => (this.relationships[id] || []).map((it) => this.accountsMap[it])
 }
 
 export default InMemoryDriver;

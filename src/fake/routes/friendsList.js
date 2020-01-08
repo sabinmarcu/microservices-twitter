@@ -46,6 +46,8 @@ export default async (server, logger) => {
 
       log('Finding', screen_name);
       const account = await driver.getAccount(screen_name);
+
+      log('Found', account);
       if (!(await driver.hasFriends(screen_name))) {
         log('Will generate between %d and %d friends', rstart, rend);
 
@@ -85,20 +87,22 @@ export default async (server, logger) => {
       }
 
       let users = await driver.getFriendsOf(screen_name);
-      let next_cursor = 0;
+      let next_cursor = -1;
       if (typeof cursorStr !== 'undefined' && count) {
         const len = users.length;
-        log('Filtering through cursor %d (count %d)', cursor, count);
-        log('Selecting indices [%d, %d]', cursor, cursor + count - 1);
+        const currentCursor = cursor === -1 ? 0 : cursor;
+        log('Filtering through cursor %d (count %d)', currentCursor, count);
+        log('Selecting indices [%d, %d]', currentCursor, currentCursor + count - 1);
         users = users.filter(
-          (it, index) => (index >= cursor) && (index < cursor + count),
+          (it, index) => (index >= currentCursor) && (index < currentCursor + count),
         );
-        next_cursor = cursor + count;
+        next_cursor = currentCursor + count;
         if (next_cursor >= len) {
-          next_cursor = -1;
+          next_cursor = 0;
         }
       }
 
+      log('Sending', { users, next_cursor });
       res.json({
         users,
         next_cursor,
