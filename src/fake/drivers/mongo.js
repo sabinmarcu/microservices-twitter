@@ -40,7 +40,12 @@ export class MongoDriver extends Interface {
 
   getAccountsWithout = async (id) => this.collection.find({ screen_name: { $ne: id } }).toArray()
 
-  getRandomAccount = async () => this.collection.aggregate({}, { sample: 1 }).toArray();
+  getRandomAccount = async (except) => (
+    await this.collection.aggregate([
+      { $match: { $and: except.map((it) => ({ screen_name: { $ne: it } })) } },
+      { $sample: { size: 1 } },
+    ]).toArray()
+  )[0];
 
   bindAccounts = async (a, b) => {
     const accA = await this.getAccount(a.screen_name);

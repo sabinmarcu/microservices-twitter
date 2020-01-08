@@ -1,11 +1,13 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable import/no-dynamic-require,camelcase */
+import fs from 'fs';
+import path from 'path';
 import debug from '../../log';
 import makeRoute from '../shared';
 import { makeLimiter } from '../rate';
 
 export const endpoint = '/friends/list';
-const Driver = require(`../drivers/${process.env.RC_DRIVER || 'memory'}`).default;
+const Driver = require(`../drivers/${process.env.RC_FAKE_DRIVER || 'memory'}`).default;
 
 const [rstart, rend] = (process.env.RC_TWITTER_FRIENDS_RANGE || '3:5')
   .split(':')
@@ -53,7 +55,7 @@ export default async (server, logger) => {
 
         const total = parseInt(Math.random() * (rend - rstart), 10) + rstart;
         const take = Math.min(
-          Math.floor(total / 2),
+          Math.floor((total / 5) * 4),
           (await driver.getAccountsWithout(screen_name)).length,
         );
         const create = total - take;
@@ -66,20 +68,21 @@ export default async (server, logger) => {
             .map(() => driver.getAccount()),
         );
 
-        const taken = (async () => {
+        const taken = await (async () => {
           const list = [];
           while (list.length < take) {
-            let acc;
-            do {
-              acc = await driver.getRandomAccount();
-            } while (
-              acc.screen_name === screen_name
-              || list.find(({ screen_name: it }) => it === screen_name)
-            );
+            log('Loop');
+            const acc = await driver.getRandomAccount([
+              screen_name,
+              ...list.map(({ screen_name: it }) => it),
+            ]);
             list.push(acc);
           }
           return list;
         })();
+
+        log('Created', created);
+        log('Taken', taken);
 
         await [created, taken]
           .flat()

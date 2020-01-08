@@ -1,0 +1,266 @@
+{
+	"_id" : ObjectId("5e165e87f754794068ed9e62"),
+	"friends" : [
+		"Jade.Pouros",
+		"Michelle27",
+		"Lisa13",
+		"Arnulfo.McDermott57",
+		"Stephen77",
+		"Keshawn81",
+		"Bernadette55",
+		"Monserrat.Metz",
+		"Jade.Pouros",
+		"Michelle27",
+		"Lisa13",
+		"Arnulfo.McDermott57",
+		"Stephen77",
+		"Keshawn81",
+		"Bernadette55",
+		"Monserrat.Metz"
+	],
+	"screen_name" : "sabinmarcu"
+},
+{
+	"_id" : ObjectId("5e165e87f754794068ed9e63"),
+	"screen_name" : "Jade.Pouros"
+},
+{
+	"_id" : ObjectId("5e165e88f754794068ed9e64"),
+	"friends" : [
+		"Wilfred73",
+		"Bernie47",
+		"Bernie47",
+		"Arnulfo.McDermott57",
+		"Lisa13",
+		"Keshawn81",
+		"sabinmarcu",
+		"Stephen77"
+	],
+	"screen_name" : "Michelle27"
+},
+{
+	"_id" : ObjectId("5e165e88f754794068ed9e65"),
+	"screen_name" : "Lisa13"
+},
+{
+	"_id" : ObjectId("5e165e88f754794068ed9e66"),
+	"friends" : [
+		"Virginia24",
+		"Rocio99",
+		"Monserrat.Metz",
+		"sabinmarcu",
+		"Bernie47",
+		"Virginia24",
+		"Rocio99",
+		"Virginia24",
+		"Rocio99",
+		"Monserrat.Metz",
+		"sabinmarcu",
+		"Bernie47",
+		"Virginia24",
+		"Rocio99",
+		"Virginia24",
+		"Rocio99",
+		"Monserrat.Metz",
+		"sabinmarcu",
+		"Bernie47",
+		"Virginia24",
+		"Rocio99",
+		"Virginia24",
+		"Rocio99",
+		"Monserrat.Metz",
+		"sabinmarcu",
+		"Bernie47",
+		"Virginia24",
+		"Rocio99"
+	],
+	"screen_name" : "Arnulfo.McDermott57"
+},
+{
+	"_id" : ObjectId("5e165e88f754794068ed9e67"),
+	"friends" : [
+		"Micaela_Schowalter72",
+		"Brett_White",
+		"Loyce_Effertz",
+		"Keshawn81",
+		"Dan_Champlin",
+		"Berneice_Hammes37",
+		"Micaela_Schowalter72",
+		"Brett_White",
+		"Loyce_Effertz",
+		"Keshawn81",
+		"Dan_Champlin",
+		"Berneice_Hammes37"
+	],
+	"screen_name" : "Stephen77"
+},
+{
+	"_id" : ObjectId("5e165e88f754794068ed9e68"),
+	"friends" : [
+		"Melissa_Thompson63",
+		"Virginia24",
+		"Wilfred73",
+		"Melissa_Thompson63",
+		"Arnulfo.McDermott57",
+		"Melissa_Thompson63",
+		"Virginia24",
+		"Wilfred73",
+		"Melissa_Thompson63",
+		"Arnulfo.McDermott57"
+	],
+	"screen_name" : "Keshawn81"
+},
+{
+	"_id" : ObjectId("5e165e88f754794068ed9e69"),
+	"screen_name" : "Bernadette55"
+},
+{
+	"_id" : ObjectId("5e165e88f754794068ed9e6a"),
+	"friends" : [
+		"Dan_Champlin",
+		"Berneice_Hammes37",
+		"Bernie47",
+		"Stephen77",
+		"Melissa_Thompson63",
+		"Arnulfo.McDermott57",
+		"Virginia24",
+		"Rocio99"
+	],
+	"screen_name" : "Monserrat.Metz"
+},
+{
+	"_id" : ObjectId("5e165e89f754794068ed9e6b"),
+	"friends" : [
+		"Loy83",
+		"Nadia_Carroll",
+		"Stephen77",
+		"Keshawn81",
+		"Lisa13"
+	],
+	"screen_name" : "Wilfred73"
+},
+{
+	"_id" : ObjectId("5e165e89f754794068ed9e6c"),
+	"friends" : [
+		"Loyce_Effertz",
+		"Alden.Gorczany",
+		"Arnulfo.McDermott57",
+		"Alden.Gorczany",
+		"Monserrat.Metz",
+		"Keshawn81",
+		"Lisa13",
+		"Dan_Champlin",
+		"Melissa_Thompson63"
+	],
+	"screen_name" : "Bernie47"
+},
+{
+	"_id" : ObjectId("5e165e8af754794068ed9e6d"),
+	"friends" : [
+		"Jeromy60",
+		"Mack.Anderson",
+		"Mack.Anderson",
+		"Nadia_Carroll",
+		"Jeromy60",
+		"Loyce_Effertz",
+		"Arnulfo.McDermott57"
+	],
+	"screen_name" : "Virginia24"
+},
+{
+	"_id" : ObjectId("5e165e8af754794068ed9e6e"),
+	"friends" : [
+		"Laurie_Boyer9",
+		"Nadia_Carroll",
+		"Melissa_Thompson63",
+		"Wilfred73",
+		"Virginia24",
+		"Bernie47",
+		"Jade.Pouros",
+		"Micaela_Schowalter72",
+		"Laurie_Boyer9"
+	],
+	"screen_name" : "Rocio99"
+},
+{
+	"_id" : ObjectId("5e165e8bf754794068ed9e6f"),
+	"friends" : [
+		"Ansel_Kemmer86",
+		"Emmie13",
+		"Michelle27",
+		"Wilfred73",
+		"sabinmarcu",
+		"Arnulfo.McDermott57",
+		"Micaela_Schowalter72",
+		"Stephen77"
+	],
+	"screen_name" : "Melissa_Thompson63"
+},
+{
+	"_id" : ObjectId("5e165e8cf754794068ed9e70"),
+	"screen_name" : "Dan_Champlin"
+},
+{
+	"_id" : ObjectId("5e165e8cf754794068ed9e71"),
+	"friends" : [
+		"Davon_Toy",
+		"Pat_Gerhold",
+		"Monserrat.Metz",
+		"Pat_Gerhold",
+		"Bernie47",
+		"Alden.Gorczany"
+	],
+	"screen_name" : "Berneice_Hammes37"
+},
+{
+	"_id" : ObjectId("5e165e8ef754794068ed9e72"),
+	"screen_name" : "Loyce_Effertz"
+},
+{
+	"_id" : ObjectId("5e165e8ef754794068ed9e73"),
+	"screen_name" : "Alden.Gorczany"
+},
+{
+	"_id" : ObjectId("5e165e91f754794068ed9e74"),
+	"screen_name" : "Micaela_Schowalter72"
+},
+{
+	"_id" : ObjectId("5e165e91f754794068ed9e75"),
+	"screen_name" : "Brett_White"
+},
+{
+	"_id" : ObjectId("5e165e91f754794068ed9e76"),
+	"screen_name" : "Laurie_Boyer9"
+},
+{
+	"_id" : ObjectId("5e165e92f754794068ed9e77"),
+	"screen_name" : "Nadia_Carroll"
+},
+{
+	"_id" : ObjectId("5e165e94f754794068ed9e78"),
+	"screen_name" : "Jeromy60"
+},
+{
+	"_id" : ObjectId("5e165e94f754794068ed9e79"),
+	"screen_name" : "Mack.Anderson"
+},
+{
+	"_id" : ObjectId("5e165e95f754794068ed9e7a"),
+	"screen_name" : "Ansel_Kemmer86"
+},
+{
+	"_id" : ObjectId("5e165e95f754794068ed9e7b"),
+	"screen_name" : "Emmie13"
+},
+{
+	"_id" : ObjectId("5e165e96f754794068ed9e7c"),
+	"screen_name" : "Loy83"
+},
+{
+	"_id" : ObjectId("5e165e98f754794068ed9e7d"),
+	"screen_name" : "Davon_Toy"
+},
+{
+	"_id" : ObjectId("5e165e98f754794068ed9e7e"),
+	"screen_name" : "Pat_Gerhold"
+},

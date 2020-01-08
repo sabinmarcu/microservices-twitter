@@ -1,14 +1,32 @@
-import { v1 as neo4j } from 'neo4j-driver';
-import dbConfig from './dbConfig';
+import neo4j from 'neo4j-driver';
+import dbConfig from './config';
+import debug from '../log';
 
-export const driver = neo4j.driver(
-  dbConfig.uri,
-  neo4j.auth.basic(
-    dbConfig.user,
-    dbConfig.password,
-  ),
-);
+const connect = async (logger) => {
+  const log = debug('neo4j', logger);
+  const config = {
+    url: `bolt://${dbConfig.url}`,
+    credentials: [
+      dbConfig.user,
+      dbConfig.password,
+    ],
+  };
+  log('Attempting connection with', config);
+  const driver = neo4j.driver(
+    config.url,
+    neo4j.auth.basic(...config.credentials),
+  );
+  const run = async (...args) => {
+    const session = driver.session();
+    await session.run(...args);
+    await session.close();
+  };
+  return {
+    session: {
+      run,
+    },
+    close: driver.close,
+  };
+};
 
-export const session = driver.session();
-
-export default session;
+export default connect;

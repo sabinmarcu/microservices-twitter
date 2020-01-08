@@ -33,6 +33,8 @@ class MongoHandler {
     return newUser;
   }
 
+  getUsers = () => this.users.find().toArray();
+
   addFriendToUser = async (
     inputUser,
     inputFriend,

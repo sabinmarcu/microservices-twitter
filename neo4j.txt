@@ -1,0 +1,20 @@
+To extract all R => L1 => L2, L2 accounts, do:
+
+MATCH
+  (n:Account {screen_name: 'screen_name'})
+    -[:Follows]->(:Account)
+    -[:Follows]->(l2:Account)
+WHERE
+  l2 <> n AND
+  NOT (l2)<-[:Follows]-(n)
+RETURN l2
+
+To count the number of people following an account, do:
+
+MATCH
+  (a:Account {screen_name: 'screen_name'})
+    <-[r:Follows]-(n:Account)
+RETURN COUNT(r)
+
+Quick Maffs, maybe?
+MATCH (n:Account {screen_name: 'sabinmarcu'})-[:Follows]->(:Account)-[:Follows]->(l2:Account) MATCH (:Account)-[r:Follows]->(l2) WHERE l2 <> n AND NOT (n)-[:Follows]->(l2) RETURN l2, COUNT(r)
