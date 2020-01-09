@@ -16,5 +16,6 @@ MATCH
     <-[r:Follows]-(n:Account)
 RETURN COUNT(r)
 
-Quick Maffs, maybe?
-MATCH (n:Account {screen_name: 'sabinmarcu'})-[:Follows]->(:Account)-[:Follows]->(l2:Account) MATCH (:Account)-[r:Follows]->(l2) WHERE l2 <> n AND NOT (n)-[:Follows]->(l2) RETURN l2, COUNT(r)
+FINAL QUERY:
+To get leaf nodes (people that are followed by the people I follow), and how many of my friends follow them, do:
+MATCH (n:Account {screen_name: 'sabinmarcu'}) -[:Follows]->(:Account) -[:Follows]->(l2:Account) MATCH (x:Account)-[:Follows]->(l2) WHERE l2 <> n AND NOT (l2)<-[:Follows]-(n) RETURN l2,COUNT(DISTINCT x)
